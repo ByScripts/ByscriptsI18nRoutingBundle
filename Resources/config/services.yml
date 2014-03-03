@@ -1,0 +1,25 @@
+parameters:
+    byscripts.i18n_routing.yaml_loader.class: Byscripts\Bundle\I18nRoutingBundle\Routing\YamlFileLoader
+
+services:
+    byscripts.i18n_routing.yaml_loader:
+        public: false
+        class: %byscripts.i18n_routing.yaml_loader.class%
+        arguments: [@file_locator, %byscripts.i18n_routing.locales%, %locale%]
+        tags: [{ name: routing.loader }]
+
+    byscripts.i18n_routing.router:
+        public: false
+        class: Byscripts\Bundle\I18nRoutingBundle\Routing\Router
+        arguments: [@byscripts.i18n_routing.router.original, @request_stack]
+
+    byscripts.i18n_routing.routing.loader:
+        public: false
+        class: Byscripts\Bundle\I18nRoutingBundle\Routing\DelegatingLoader
+        arguments: [@byscripts.i18n_routing.routing.loader.original]
+
+
+
+
+
+
